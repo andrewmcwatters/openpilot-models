@@ -225,6 +225,7 @@ def convert_model(model):
     fields = OrderedDict((f[0].name, convert_field(f[1])) for f in model.ListFields())
     graph = fields.pop("graph")
     opset_imports = fields.pop("opset_import", [])
+    fields.pop("metadata_props", None) # Ignore metadata_props
     return helper_traced.make_model(opset_imports=opset_imports, **fields, graph=graph)
 
 
